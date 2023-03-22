@@ -11,6 +11,7 @@
 		BDC5A89629CA6CC40083E010 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A89529CA6CC40083E010 /* ContentView.swift */; };
 		BDC5A89829CA6CC50083E010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC5A89729CA6CC50083E010 /* Assets.xcassets */; };
 		BDC5A89B29CA6CC50083E010 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC5A89A29CA6CC50083E010 /* Preview Assets.xcassets */; };
+		BDC5A8A329CA79970083E010 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A8A229CA79970083E010 /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		BDC5A89529CA6CC40083E010 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BDC5A89729CA6CC50083E010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDC5A89A29CA6CC50083E010 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BDC5A8A229CA79970083E010 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		BDC5A89229CA6CC40083E010 /* Cookcademy */ = {
 			isa = PBXGroup;
 			children = (
+				BDC5A8A129CA79620083E010 /* Models */,
 				BDC5A89329CA6CC40083E010 /* CookcademyApp.swift */,
 				BDC5A89529CA6CC40083E010 /* ContentView.swift */,
 				BDC5A89729CA6CC50083E010 /* Assets.xcassets */,
@@ -65,6 +68,14 @@
 				BDC5A89A29CA6CC50083E010 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BDC5A8A129CA79620083E010 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BDC5A8A229CA79970083E010 /* Recipe.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC5A8A329CA79970083E010 /* Recipe.swift in Sources */,
 				BDC5A89629CA6CC40083E010 /* ContentView.swift in Sources */,
 				BDC5A89429CA6CC40083E010 /* CookcademyApp.swift in Sources */,
 			);
