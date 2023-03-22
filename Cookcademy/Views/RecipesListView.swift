@@ -8,19 +8,37 @@
 import SwiftUI
 
 struct RecipesListView: View {
+    //Creates an instance of the RecipeData view model
+    //Any updates to the view model will be sent to this view
+    //The @StatObject wrapper will update the view when the model changes
+    @StateObject var recipeData = RecipeData()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        List {
+            // Recipes go here
+            ForEach(recipes) { recipe in
+                Text(recipe.mainInformation.name)
+            }
         }
-        .padding()
+        .navigationTitle(navigationTitle)
+    }
+}
+
+extension RecipesListView {
+    var recipes: [Recipe] {
+        recipeData.recipes
+    }
+    
+    var navigationTitle: String {
+        "All Recipes"
     }
 }
 
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesListView()
+        NavigationView {
+            RecipesListView()
+        }
+        
     }
 }

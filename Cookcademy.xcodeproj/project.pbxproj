@@ -12,6 +12,8 @@
 		BDC5A89829CA6CC50083E010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC5A89729CA6CC50083E010 /* Assets.xcassets */; };
 		BDC5A89B29CA6CC50083E010 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC5A89A29CA6CC50083E010 /* Preview Assets.xcassets */; };
 		BDC5A8A329CA79970083E010 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A8A229CA79970083E010 /* Recipe.swift */; };
+		BDC5A8C129CB94DD0083E010 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A8C029CB94DD0083E010 /* RecipeData.swift */; };
+		BDC5A8C529CB9C510083E010 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A8C429CB9C510083E010 /* RecipeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		BDC5A89729CA6CC50083E010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDC5A89A29CA6CC50083E010 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BDC5A8A229CA79970083E010 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		BDC5A8C029CB94DD0083E010 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		BDC5A8C429CB9C510083E010 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				BDC5A89529CA6CC40083E010 /* RecipesListView.swift */,
+				BDC5A8C429CB9C510083E010 /* RecipeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -90,6 +95,7 @@
 		BDC5A8BF29CB91E90083E010 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BDC5A8C029CB94DD0083E010 /* RecipeData.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -165,6 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDC5A8A329CA79970083E010 /* Recipe.swift in Sources */,
+				BDC5A8C529CB9C510083E010 /* RecipeDetailView.swift in Sources */,
+				BDC5A8C129CB94DD0083E010 /* RecipeData.swift in Sources */,
 				BDC5A89629CA6CC40083E010 /* RecipesListView.swift in Sources */,
 				BDC5A89429CA6CC40083E010 /* CookcademyApp.swift in Sources */,
 			);
