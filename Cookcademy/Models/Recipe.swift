@@ -11,6 +11,17 @@ struct Recipe {
     var mainInformation: MainInformation
     var ingredients: [Ingredient]
     var directions: [Direction]
+    
+    init(mainInformation: MainInformation, ingredients: [Ingredient], directions: [Direction]) {
+        self.mainInformation = mainInformation
+        self.ingredients = ingredients
+        self.directions = directions
+    }
+    
+    //used to make empty recipes that the user can edit
+    init() {
+        self.init(mainInformation: MainInformation(name: "", description: "", author: "", category: .breakfast), ingredients: [], directions: [])
+    }
 }
 
 struct MainInformation {
@@ -32,13 +43,16 @@ struct Ingredient {
     var quantity: Double
     var unit: Unit
     
+    //returns a String that describes the Ingredient in a more digestable format
     var description: String {
         let formattedQuantity = String(format: "%g", quantity)
         switch unit {
         case .none:
+            //If there are no units, the formattedQuantity and the formattedName are displayed, but no units
             let formattedName = quantity == 1 ? name : "\(name)s"
             return "\(formattedQuantity) \(formattedName)"
         default:
+            //If there are units and the quantity is exactly 1, then the singularName is used. Otherwise, the rawValue of the Unit is used
             if quantity == 1 {
                 return "1 \(unit.singularName) \(name)"
             } else {
@@ -67,6 +81,7 @@ struct Direction {
 }
 
 extension Recipe {
+    //array of recipes given by the community
     static let testRecipes: [Recipe] = [
         Recipe(mainInformation: MainInformation(name: "Dad's Mashed Potatoes",
                                                 description: "Buttery salty mashed potatoes!",
