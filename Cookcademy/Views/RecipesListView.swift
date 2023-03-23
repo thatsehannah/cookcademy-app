@@ -12,13 +12,17 @@ struct RecipesListView: View {
     //Any updates to the view model will be sent to this view
     //The @StatObject wrapper will update the view when the model changes
     @StateObject var recipeData = RecipeData()
+    private let listBackgroundColor = AppColor.background
+    private let listForegroundColor = AppColor.foreground
     
     var body: some View {
         List {
             // Recipes go here
             ForEach(recipes) { recipe in
-                Text(recipe.mainInformation.name)
+                NavigationLink(recipe.mainInformation.name, destination: RecipeDetailView(recipe: recipe))
             }
+            .listRowBackground(listBackgroundColor)
+            .foregroundColor(listForegroundColor)
         }
         .navigationTitle(navigationTitle)
     }
