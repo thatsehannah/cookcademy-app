@@ -1,0 +1,92 @@
+//
+//  ContentView.swift
+//  Cookcademy
+//
+//  Created by Elliot Hannah III on 3/21/23.
+//
+
+import SwiftUI
+
+struct RecipesListView: View {
+    @EnvironmentObject private var recipeDataViewModel: RecipeDataViewModel
+    let category: MainInformation.Category
+    
+    @State private var isPresenting = false
+    @State private var newRecipe = Recipe()
+    
+    private let listBackgroundColor = AppColor.background
+    private let listForegroundColor = AppColor.foreground
+    
+    var body: some View {
+        NavigationView(content: {
+            List {
+                // Recipes go here
+                ForEach(recipes) { recipe in
+                    NavigationLink(
+                        destination: {
+                            RecipeDetailView(recipe: recipe)
+                        },
+                        label: {
+                            Text(recipe.mainInformation.name)
+                        })
+                }
+                .listRowBackground(listBackgroundColor)
+                .foregroundColor(listForegroundColor)
+            }
+            .navigationTitle(navigationTitle)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        isPresenting = true
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                })
+            })
+            .sheet(isPresented: $isPresenting, content: {
+                NavigationView(content: {
+                    ModifyRecipeView(recipe: $newRecipe)
+                        .toolbar(content: {
+                            ToolbarItem(placement: .cancellationAction, content: {
+                                Button(action: {
+                                    isPresenting = false
+                                }, label: {
+                                    Text("Dismiss")
+                                })
+                            })
+                            ToolbarItem(placement: .confirmationAction, content: {
+                                Button(action: {
+                                    recipeDataViewModel.recipes.append(newRecipe)
+                                    isPresenting = false
+                                }, label: {
+                                    Text("Add")
+                                })
+                            })
+                        })
+                })
+                .navigationTitle("Add a New Recipe")
+            })
+        })
+        
+    }
+}
+
+extension RecipesListView {
+    private var recipes: [Recipe] {
+        recipeDataViewModel.getRecipes(for: category)
+    }
+    
+    var navigationTitle: String {
+        "\(category.rawValue) Recipes"
+    }
+}
+
+struct RecipesListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            RecipesListView(category: .breakfast)
+                .environmentObject(RecipeDataViewModel())
+        }
+        
+    }
+}
