@@ -18,54 +18,56 @@ struct RecipesListView: View {
     private let listForegroundColor = AppColor.foreground
     
     var body: some View {
-        NavigationView(content: {
-            List {
-                // Recipes go here
-                ForEach(recipes) { recipe in
-                    NavigationLink(
-                        destination: {
-                            RecipeDetailView(recipe: recipe)
-                        },
-                        label: {
-                            Text(recipe.mainInformation.name)
-                        })
-                }
-                .listRowBackground(listBackgroundColor)
-                .foregroundColor(listForegroundColor)
-            }
-            .navigationTitle(navigationTitle)
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Button(action: {
-                        isPresenting = true
-                    }, label: {
-                        Image(systemName: "plus")
+        List {
+            // Recipes go here
+            ForEach(recipes) { recipe in
+                NavigationLink(
+                    destination: {
+                        RecipeDetailView(recipe: recipe)
+                    },
+                    label: {
+                        Text(recipe.mainInformation.name)
                     })
+            }
+            .listRowBackground(listBackgroundColor)
+            .foregroundColor(listForegroundColor)
+        }
+        .navigationTitle(navigationTitle)
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    isPresenting = true
+                }, label: {
+                    Image(systemName: "plus")
                 })
             })
-            .sheet(isPresented: $isPresenting, content: {
-                NavigationView(content: {
-                    ModifyRecipeView(recipe: $newRecipe)
-                        .toolbar(content: {
-                            ToolbarItem(placement: .cancellationAction, content: {
-                                Button(action: {
-                                    isPresenting = false
-                                }, label: {
-                                    Text("Dismiss")
-                                })
-                            })
-                            ToolbarItem(placement: .confirmationAction, content: {
-                                Button(action: {
-                                    recipeDataViewModel.recipes.append(newRecipe)
-                                    isPresenting = false
-                                }, label: {
-                                    Text("Add")
-                                })
+        })
+        //.sheet is the modal
+        //Remember: toolbars can only be used on NavigationView views (especially if there aren't any in the hierarchy)
+        .sheet(isPresented: $isPresenting, content: {
+            NavigationView(content: {
+                ModifyRecipeView(recipe: $newRecipe)
+                    .toolbar(content: {
+                        ToolbarItem(placement: .cancellationAction, content: {
+                            Button(action: {
+                                isPresenting = false
+                            }, label: {
+                                Text("Dismiss")
                             })
                         })
-                })
-                .navigationTitle("Add a New Recipe")
+                        ToolbarItem(placement: .confirmationAction, content: {
+                            Button(action: {
+                                if newRecipe.isValid {
+                                    recipeDataViewModel.add(recipe: newRecipe)
+                                    isPresenting = false
+                                }
+                            }, label: {
+                                Text("Add")
+                            })
+                        })
+                    })
             })
+            .navigationTitle("Add a New Recipe")
         })
         
     }

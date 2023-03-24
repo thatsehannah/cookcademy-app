@@ -27,8 +27,8 @@ struct RecipeCategoryGridView: View {
                             }
                         )
                     }
-                }).navigationTitle("Categories")
-            }
+                })
+            }.navigationTitle("Categories")
             
         }
     }
