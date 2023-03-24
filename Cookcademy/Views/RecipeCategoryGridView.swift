@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct RecipeCategoryGridView: View {
-    private var recipeData = RecipeData()
+    //Creates an instance of the RecipeData view model
+    //Any updates to the view model will be sent to this view
+    //The @StatObject wrapper will update the view when the model changes
+    @StateObject private var recipeDataViewModel = RecipeDataViewModel()
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: [GridItem(), GridItem()], content: {
                     ForEach(MainInformation.Category.allCases, id: \.self) { category in
-                       CategoryView(category: category)
+                        NavigationLink(
+                            destination: {
+                                RecipesListView(category: category).environmentObject(recipeDataViewModel)
+                            },
+                            label: {
+                                CategoryView(category: category)
+                            }
+                        )
                     }
                 }).navigationTitle("Categories")
             }

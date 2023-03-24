@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct RecipesListView: View {
-    //Creates an instance of the RecipeData view model
-    //Any updates to the view model will be sent to this view
-    //The @StatObject wrapper will update the view when the model changes
-    @StateObject var recipeData = RecipeData()
+    @EnvironmentObject private var recipeDataViewModel: RecipeDataViewModel
+    let category: MainInformation.Category
+    
     private let listBackgroundColor = AppColor.background
     private let listForegroundColor = AppColor.foreground
     
@@ -19,7 +18,13 @@ struct RecipesListView: View {
         List {
             // Recipes go here
             ForEach(recipes) { recipe in
-                NavigationLink(recipe.mainInformation.name, destination: RecipeDetailView(recipe: recipe))
+                NavigationLink(
+                    destination: {
+                        RecipeDetailView(recipe: recipe)
+                    },
+                    label: {
+                        Text(recipe.mainInformation.name)
+                    })
             }
             .listRowBackground(listBackgroundColor)
             .foregroundColor(listForegroundColor)
@@ -29,19 +34,20 @@ struct RecipesListView: View {
 }
 
 extension RecipesListView {
-    var recipes: [Recipe] {
-        recipeData.recipes
+    private var recipes: [Recipe] {
+        recipeDataViewModel.getRecipes(for: category)
     }
     
     var navigationTitle: String {
-        "All Recipes"
+        "\(category.rawValue) Recipes"
     }
 }
 
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RecipesListView()
+            RecipesListView(category: .dinner)
+                .environmentObject(RecipeDataViewModel())
         }
         
     }
