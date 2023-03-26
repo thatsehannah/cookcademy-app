@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD1A5E6229D0FD88001B7604 /* ModifyMainInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1A5E6129D0FD88001B7604 /* ModifyMainInformationView.swift */; };
 		BD5CD78929CD732A00ECD93C /* ModifyRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5CD78829CD732A00ECD93C /* ModifyRecipeView.swift */; };
 		BD981F0929CD1CDE0092452D /* RecipeCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD981F0829CD1CDE0092452D /* RecipeCategoryGridView.swift */; };
 		BDC5A89429CA6CC40083E010 /* CookcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC5A89329CA6CC40083E010 /* CookcademyApp.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD1A5E6129D0FD88001B7604 /* ModifyMainInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMainInformationView.swift; sourceTree = "<group>"; };
 		BD5CD78829CD732A00ECD93C /* ModifyRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRecipeView.swift; sourceTree = "<group>"; };
 		BD981F0829CD1CDE0092452D /* RecipeCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryGridView.swift; sourceTree = "<group>"; };
 		BDC5A89029CA6CC40083E010 /* Cookcademy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookcademy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				BD5CD78829CD732A00ECD93C /* ModifyRecipeView.swift */,
+				BD1A5E6129D0FD88001B7604 /* ModifyMainInformationView.swift */,
 			);
 			path = ModifyRecipes;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				BD5CD78929CD732A00ECD93C /* ModifyRecipeView.swift in Sources */,
 				BDC5A89629CA6CC40083E010 /* RecipesListView.swift in Sources */,
 				BDC5A89429CA6CC40083E010 /* CookcademyApp.swift in Sources */,
+				BD1A5E6229D0FD88001B7604 /* ModifyMainInformationView.swift in Sources */,
 				BDC5A8C729CC0D640083E010 /* AppColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
