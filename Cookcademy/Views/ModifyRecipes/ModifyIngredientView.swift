@@ -9,11 +9,17 @@ import SwiftUI
 
 struct ModifyIngredientView: View {
     @State var ingredient: Ingredient
+    let createAction: ((Ingredient) -> Void)
+    
+    @Environment(\.dismiss) private var dismiss
+    private let listBackgroundColor = AppColor.background
+    private let listTextColor = AppColor.foreground
     
     var body: some View {
         VStack {
             Form {
                 TextField("Ingredient Name", text: $ingredient.name)
+                    .listRowBackground(listBackgroundColor)
                 Stepper(value: $ingredient.quantity, in: 0...100, step: 0.5) {
                     HStack {
                         Text("Quantity: ")
@@ -23,6 +29,7 @@ struct ModifyIngredientView: View {
                             .keyboardType(.numbersAndPunctuation)
                     }
                 }
+                    .listRowBackground(listBackgroundColor)
                 Picker(selection: $ingredient.unit, label: HStack {
                     Text("Unit")
                     Spacer()
@@ -31,7 +38,18 @@ struct ModifyIngredientView: View {
                         Text(unit.rawValue)
                     }
                 }
+                .listRowBackground(listBackgroundColor)
+                HStack {
+                    Spacer()
+                    Button("Save") {
+                        createAction(ingredient)
+                        dismiss()
+                    }
+                    Spacer()
+                }
+                .listRowBackground(listBackgroundColor)
             }
+            .foregroundColor(listTextColor)
         }
     }
 }
@@ -39,7 +57,12 @@ struct ModifyIngredientView: View {
 struct ModifyIngredientView_Previews: PreviewProvider {
     @State static var emptyIngredient = Ingredient(name: "", quantity: 1.0, unit: .none)
     static var previews: some View {
-        ModifyIngredientView(ingredient: emptyIngredient)
+        NavigationView {
+            ModifyIngredientView(ingredient: emptyIngredient) {ingredient in
+                print(ingredient)
+            }
+        }
+       
     }
 }
 

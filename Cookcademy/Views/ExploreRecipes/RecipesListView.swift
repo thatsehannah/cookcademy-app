@@ -47,29 +47,24 @@ struct RecipesListView: View {
         .sheet(isPresented: $isPresenting, content: {
             NavigationView(content: {
                 ModifyRecipeView(recipe: $newRecipe)
+                    .navigationTitle("Add a New Recipe")
                     .toolbar(content: {
-                        ToolbarItem(placement: .cancellationAction, content: {
-                            Button(action: {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Dismiss") {
                                 isPresenting = false
-                            }, label: {
-                                Text("Dismiss")
-                            })
-                        })
-                        ToolbarItem(placement: .confirmationAction, content: {
-                            Button(action: {
-                                if newRecipe.isValid {
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            if newRecipe.isValid {
+                                Button("Add") {
                                     recipeDataViewModel.add(recipe: newRecipe)
                                     isPresenting = false
                                 }
-                            }, label: {
-                                Text("Add")
-                            })
-                        })
+                            }
+                        }
                     })
             })
-            .navigationTitle("Add a New Recipe")
         })
-        
     }
 }
 

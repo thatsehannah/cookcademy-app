@@ -53,6 +53,16 @@ struct Ingredient {
     var quantity: Double
     var unit: Unit
     
+    init(name: String, quantity: Double, unit: Unit) {
+        self.name = name
+        self.quantity = quantity
+        self.unit = unit
+    }
+    
+    init() {
+        self.init(name: "", quantity: 0.0, unit: .none)
+    }
+    
     //returns a String that describes the Ingredient in a more digestable format
     var description: String {
         let formattedQuantity = String(format: "%g", quantity)
@@ -75,7 +85,7 @@ struct Ingredient {
         case oz = "Ounces"
         case g = "Grams"
         case cups = "Cups"
-        case tbs = "Tablesppons"
+        case tbs = "Tablespoons"
         case tsp = "Teaspoons"
         case none = "None"
         
