@@ -32,7 +32,6 @@ struct ModifyMainInformationView: View {
                     Text(category.rawValue)
                 }
             }
-            .pickerStyle(MenuPickerStyle())
             .listRowBackground(listBackground)
         }
         .foregroundColor(listTextColor)
