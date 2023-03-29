@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-struct ModifyIngredientView: View {
-    @State var ingredient: Ingredient
-    let createAction: ((Ingredient) -> Void)
+struct ModifyIngredientView: ModifyComponentView {
+    @Binding var ingredient: Ingredient
+    let createAction: (Ingredient) -> Void
+    
+    init(component: Binding<Ingredient>, createAction: @escaping (Ingredient) -> Void) {
+        self._ingredient = component
+        self.createAction = createAction
+    }
     
     @Environment(\.dismiss) private var dismiss
     private let listBackgroundColor = AppColor.background
@@ -58,9 +63,7 @@ struct ModifyIngredientView_Previews: PreviewProvider {
     @State static var emptyIngredient = Ingredient(name: "", quantity: 1.0, unit: .none)
     static var previews: some View {
         NavigationView {
-            ModifyIngredientView(ingredient: emptyIngredient) {ingredient in
-                print(ingredient)
-            }
+            ModifyIngredientView(component: $emptyIngredient) {_ in return}
         }
        
     }

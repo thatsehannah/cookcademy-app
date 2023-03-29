@@ -11,6 +11,17 @@ protocol RecipeComponent {
     init()
 }
 
+//ModifyIngredientView and ModifyDirectionView will conform to this
+//To conform to this protocol, a struct must conform to View and declare an initializer that
+//takes in a binding to Component and a closure named createAction that it will execute when
+//the user decides to add a new component
+protocol ModifyComponentView: View {
+    
+    //correlates to a specific component, either the ingredients or directions
+    associatedtype Component
+    init(component: Binding<Component>, createAction: @escaping (Component) -> Void)
+}
+
 struct ModifyComponentsView: View {
     @Binding var ingredients: [Ingredient]
     @State private var newIngredient = Ingredient()
@@ -20,7 +31,7 @@ struct ModifyComponentsView: View {
     
     var body: some View {
         VStack {
-            let addIngredientView = ModifyIngredientView(ingredient: newIngredient) { ingredient in
+            let addIngredientView = ModifyIngredientView(component: $newIngredient) { ingredient in
                 ingredients.append(ingredient)
                 newIngredient = Ingredient()
             }.navigationTitle("Add Ingredient")
