@@ -23,7 +23,7 @@ struct RecipesListView: View {
             ForEach(recipes) { recipe in
                 NavigationLink(
                     destination: {
-                        RecipeDetailView(recipe: recipe)
+                        RecipeDetailView(recipe: binding(for: recipe))
                     },
                     label: {
                         Text(recipe.mainInformation.name)
@@ -73,8 +73,15 @@ extension RecipesListView {
         recipeDataViewModel.getRecipes(for: category)
     }
     
-    var navigationTitle: String {
+    private var navigationTitle: String {
         "\(category.rawValue) Recipes"
+    }
+    
+    func binding(for recipe: Recipe) -> Binding<Recipe> {
+        guard let index = recipeDataViewModel.index(of: recipe) else {
+            fatalError("Recipe not found")
+        }
+        return $recipeDataViewModel.recipes[index]
     }
 }
 
