@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct RecipeCategoryGridView: View {
-    //Creates an instance of the RecipeData view model
-    //Any updates to the view model will be sent to this view
-    //The @StatObject wrapper will update the view when the model changes
-    @StateObject private var recipeDataViewModel = RecipeDataViewModel()
+    @EnvironmentObject private var recipeDataViewModel: RecipeDataViewModel
     
     var body: some View {
         NavigationView {
