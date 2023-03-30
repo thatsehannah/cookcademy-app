@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipesListView: View {
     @EnvironmentObject private var recipeDataViewModel: RecipeDataViewModel
-    let category: MainInformation.Category
+    let viewStyle: ViewStyle
     
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
@@ -21,26 +21,22 @@ struct RecipesListView: View {
         List {
             // Recipes go here
             ForEach(recipes) { recipe in
-                NavigationLink(
-                    destination: {
-                        RecipeDetailView(recipe: binding(for: recipe))
-                    },
-                    label: {
-                        Text(recipe.mainInformation.name)
-                    })
+                NavigationLink(recipe.mainInformation.name, destination: RecipeDetailView(recipe: binding(for: recipe)))
             }
             .listRowBackground(listBackgroundColor)
             .foregroundColor(listForegroundColor)
         }
         .navigationTitle(navigationTitle)
         .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing, content: {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
+                    newRecipe = Recipe()
+                    newRecipe.mainInformation.category = recipes.first?.mainInformation.category ?? .breakfast
                     isPresenting = true
                 }, label: {
                     Image(systemName: "plus")
                 })
-            })
+            }
         })
         //.sheet is the modal
         //Remember: toolbars can only be used on NavigationView views (especially if there aren't any in the hierarchy)
@@ -57,9 +53,13 @@ struct RecipesListView: View {
                         ToolbarItem(placement: .confirmationAction) {
                             if newRecipe.isValid {
                                 Button("Add") {
+                                    if case .favorites = viewStyle {
+                                        newRecipe.isFavorite = true
+                                    }
                                     recipeDataViewModel.add(recipe: newRecipe)
                                     isPresenting = false
                                 }
+                                
                             }
                         }
                     })
@@ -69,12 +69,27 @@ struct RecipesListView: View {
 }
 
 extension RecipesListView {
+    enum ViewStyle {
+        case favorites
+        case singleCategory(MainInformation.Category)
+    }
+    
     private var recipes: [Recipe] {
-        recipeDataViewModel.getRecipes(for: category)
+        switch viewStyle {
+        case let .singleCategory(category):
+            return recipeDataViewModel.getRecipes(for: category)
+        case .favorites:
+            return recipeDataViewModel.favoriteRecipes
+        }
     }
     
     private var navigationTitle: String {
-        "\(category.rawValue) Recipes"
+        switch viewStyle {
+        case let .singleCategory(category):
+            return "\(category.rawValue) Recipes"
+        case .favorites:
+            return "Favorite Recipes"
+        }
     }
     
     func binding(for recipe: Recipe) -> Binding<Recipe> {
@@ -88,7 +103,7 @@ extension RecipesListView {
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RecipesListView(category: .breakfast)
+            RecipesListView(viewStyle: .singleCategory(.breakfast))
                 .environmentObject(RecipeDataViewModel())
         }
         
