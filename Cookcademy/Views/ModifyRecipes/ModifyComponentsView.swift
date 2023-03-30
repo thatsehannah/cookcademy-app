@@ -46,7 +46,8 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
             let addComponentView = DestinationView(component: $newComponent) { component in
                 components.append(component)
                 newComponent = Component()
-            }.navigationTitle("Add \(Component.singularName().capitalized)")
+            }
+                .navigationTitle("Add \(Component.singularName().capitalized)")
             if components.isEmpty {
                 Spacer()
                 NavigationLink("Add the first \(Component.singularName())", destination: addComponentView)
