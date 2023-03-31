@@ -29,6 +29,7 @@ class RecipeDataViewModel: ObservableObject {
     func add(recipe: Recipe) {
         if recipe.isValid {
             recipes.append(recipe)
+            saveRecipes()
         }
     }
     

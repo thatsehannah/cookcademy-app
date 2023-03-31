@@ -31,6 +31,9 @@ struct MainTabView: View {
                 }
         }
         .environmentObject(recipeDataViewModel)
+        .onAppear{
+            recipeDataViewModel.loadRecipes()
+        }
     }
 }
 

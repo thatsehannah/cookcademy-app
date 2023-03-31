@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @Binding var recipe: Recipe
+    @EnvironmentObject private var recipeDataViewModel: RecipeDataViewModel
     
     @AppStorage("hideOptionalSteps") private var hideOptionalSteps: Bool = false
     @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
@@ -77,6 +78,7 @@ struct RecipeDetailView: View {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Save") {
                                 isPresenting = false
+                                recipeDataViewModel.saveRecipes()
                             }
                         }
                     }
