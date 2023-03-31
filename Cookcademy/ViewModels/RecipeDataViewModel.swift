@@ -41,4 +41,35 @@ class RecipeDataViewModel: ObservableObject {
         
         return nil
     }
+    
+    func saveRecipes() {
+        do {
+            let encodedData = try JSONEncoder().encode(recipes) //encodes the recipes to JSON
+            try encodedData.write(to: recipesFileURL) //saves them by writing them to the URL in the documents directory
+        }
+        catch {
+            fatalError("An error occurred while saving recipes: \(error)")
+        }
+    }
+    
+    func loadRecipes() {
+        guard let data = try? Data(contentsOf: recipesFileURL) else { return } //reads the contents of the internal recipes URL
+        do {
+            let savedRecipes = try JSONDecoder().decode([Recipe].self, from: data) //decodes the data into an array of Recipe
+            recipes = savedRecipes
+        }
+        catch {
+            fatalError("An error occured while loading recipes: \(error)")
+        }
+    }
+    
+    private var recipesFileURL: URL {
+        do {
+            let documentsDir = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            return documentsDir.appendingPathComponent("recipeData")
+        }
+        catch {
+            fatalError("An error while getting the url: \(error)")
+        }
+    }
 }
