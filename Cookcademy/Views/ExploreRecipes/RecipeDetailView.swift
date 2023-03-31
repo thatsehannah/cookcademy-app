@@ -58,7 +58,6 @@ struct RecipeDetailView: View {
                         isPresenting = true
                     }
                     Button(action: {
-                        print("Favorite button was checked")
                         recipe.isFavorite.toggle()
                     }) {
                         Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
