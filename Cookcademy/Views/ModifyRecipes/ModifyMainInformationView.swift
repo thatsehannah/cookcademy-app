@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ModifyMainInformationView: View {
     private let listBackground = AppColor.background
-    private let listTextColor = AppColor.foreground
+    @AppStorage("listTextColor") private var listTextColor = AppColor.foreground
     
     @Binding var mainInformation: MainInformation
     
