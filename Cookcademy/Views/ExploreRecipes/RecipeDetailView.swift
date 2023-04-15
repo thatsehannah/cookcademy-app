@@ -56,6 +56,9 @@ struct RecipeDetailView: View {
                 }.listRowBackground(listBackgroundColor)
             }
         }
+        .onDisappear{
+            print("RecipeDetailView has been dismissed")
+        }
         .navigationTitle(recipe.mainInformation.name)
         .toolbar {
             ToolbarItem {

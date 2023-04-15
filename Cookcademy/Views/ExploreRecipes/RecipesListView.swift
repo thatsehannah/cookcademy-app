@@ -103,7 +103,7 @@ extension RecipesListView {
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RecipesListView(viewStyle: .singleCategory(.breakfast))
+            RecipesListView(viewStyle: .singleCategory(.dinner))
                 .environmentObject(RecipeDataViewModel())
         }
         
